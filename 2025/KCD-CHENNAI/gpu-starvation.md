@@ -1,5 +1,10 @@
-# Scaling AI on Kubernetes: Addressing GPU Starvation, API Meltdowns, and Scheduling Nightmares
+# Scaling AI on Kubernetes: GPU Starvation, API Meltdowns, and Scheduling Nightmares
 
+## Understanding the Title and the Core Relationship
+
+The title of this discussion highlights three key challenges when scaling Artificial Intelligence workloads on Kubernetes. **GPU starvation** refers to situations where AI tasks are unable to access the necessary Graphics Processing Units, hindering their performance. **API meltdowns** describe scenarios where the communication channels within your Kubernetes cluster or with your AI applications become overwhelmed and unresponsive. And **scheduling nightmares** represent the difficulties in efficiently allocating resources, particularly GPUs, to these demanding AI workloads.
+
+While all three issues can impact the scalability and stability of your AI infrastructure, the focus of our immediate discussion is the critical relationship between **GPU starvation** and **scheduling nightmares**. Think of it this way: the underlying *cause* of much of the GPU starvation we observe is the set of *problems* we call scheduling nightmares. If Kubernetes' system for deciding which AI tasks get which GPUs is inefficient or doesn't understand the specific needs of these workloads, it leads directly to situations where some tasks are left waiting without GPUs – they are starved. Therefore, to effectively address and minimize GPU starvation, we must first understand and then overcome the limitations and inefficiencies in how Kubernetes schedules these vital resources.
 ## GPU Starvation in Kubernetes: Understanding the Challenge and Emerging Solutions
 
 AI workloads, particularly model training and inference, are exceptionally demanding on GPU resources. In Kubernetes environments where multiple workloads vie for these resources, **GPU starvation** becomes a critical issue. Pods can be left in a pending state indefinitely, waiting for GPU access, which severely impacts performance and prolongs job completion times.
@@ -184,3 +189,4 @@ The future of efficient AI-optimized Kubernetes GPU clusters likely involves a c
 
 ✅ CPUs are managed effectively within Kubernetes.
 🛑 GPUs require more sophisticated handling, especially concerning memory-aware scheduling.
+

@@ -2,9 +2,22 @@
 
 ## Understanding the Title and the Core Relationship
 
-The title of this discussion highlights three key challenges when scaling Artificial Intelligence workloads on Kubernetes. **GPU starvation** refers to situations where AI tasks are unable to access the necessary Graphics Processing Units, hindering their performance. **API meltdowns** describe scenarios where the communication channels within your Kubernetes cluster or with your AI applications become overwhelmed and unresponsive. And **scheduling nightmares** represent the difficulties in efficiently allocating resources, particularly GPUs, to these demanding AI workloads.
+<!-- GPU starvation hits when AI workloads can’t get the GPUs they need. API meltdowns happen when internal cluster communications or application-level APIs get overwhelmed and unresponsive. But the root of the chaos often lies in scheduling nightmares—Kubernetes struggling to assign the right GPUs to the right jobs at the right time.
 
-While all three issues can impact the scalability and stability of your AI infrastructure, the focus of our immediate discussion is the critical relationship between **GPU starvation** and **scheduling nightmares**. Think of it this way: the underlying *cause* of much of the GPU starvation we observe is the set of *problems* we call scheduling nightmares. If Kubernetes' system for deciding which AI tasks get which GPUs is inefficient or doesn't understand the specific needs of these workloads, it leads directly to situations where some tasks are left waiting without GPUs – they are starved. Therefore, to effectively address and minimize GPU starvation, we must first understand and then overcome the limitations and inefficiencies in how Kubernetes schedules these vital resources.
+Here’s the core truth: most GPU starvation is a symptom of poor scheduling.
+When Kubernetes can’t intelligently prioritizeth and allocate GPUs for AI workloads, jobs pile up and starve. To fix starvation, we need to fix the scheduler—make it GPU-aware, priority-aware, and designed for AI scale. -->
+
+Ever felt like your AI experiments are stuck in slow motion? That's often GPU starvation – your models just can't get the processing power they need, and they end up waiting... and waiting.
+
+Now, think about why that might be happening. It's often because Kubernetes, the system managing everything, isn't exactly a GPU expert out of the box. It can end up putting the wrong tasks on the wrong machines, leaving expensive GPUs sitting idle while other jobs are desperate for them. That's the scheduling nightmare with GPUs
+
+And when things get really bad? Imagine your whole system becoming super slow, or even going offline. That's what can happen with API meltdowns. When GPUs are scarce and things are scheduled poorly, everything starts retrying and overloading, bringing everything down.
+
+The good news is, we're getting better ways to handle GPUs in Kubernetes. Instead of treating every GPU the same, we can now split them up more precisely. Also, different AI jobs can share a single GPU more efficiently. And importantly, we can now tell Kubernetes exactly how much GPU memory each AI job needs. These are real improvements to the basic GPU scheduling problems, which will help our AI run smoother and faster.
+
+
+Lets get started 
+
 ## GPU Starvation in Kubernetes: Understanding the Challenge and Emerging Solutions
 
 AI workloads, particularly model training and inference, are exceptionally demanding on GPU resources. In Kubernetes environments where multiple workloads vie for these resources, **GPU starvation** becomes a critical issue. Pods can be left in a pending state indefinitely, waiting for GPU access, which severely impacts performance and prolongs job completion times.
